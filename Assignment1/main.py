@@ -38,6 +38,11 @@ resources = {
     "cheese": 24,  ## ounces
 }
 
+# Coin values
+DOLLAR = 1.00
+HALF_DOLLAR = 0.50
+QUARTER = 0.25
+NICKEL = 0.05
 
 ### Complete functions ###
 
@@ -71,10 +76,10 @@ class SandwichMachine:
             large_dollars = half_dollars = quarters = nickels = 0
 
         total = (
-            large_dollars * 1.00 +
-            half_dollars * 0.50 +
-            quarters * 0.25 +
-            nickels * 0.05
+            large_dollars * DOLLAR +
+            half_dollars * HALF_DOLLAR +
+            quarters * QUARTER +
+            nickels * NICKEL
         )
         return round(total, 2)
 
@@ -116,30 +121,29 @@ def main():
             print("Thank you!")
             break
 
-        elif choice == "report":
+        if choice == "report":
             show_report(machine.machine_resources)
             continue
 
-        elif choice in recipes:
-            order = recipes[choice]
-            order_ingredients = order["ingredients"]
-            cost = order["cost"]
-
-            # Check resources
-            if not machine.check_resources(order_ingredients):
-                continue
-
-            # Process coins and transaction
-            coins_inserted = machine.process_coins()
-            if not machine.transaction_result(coins_inserted, cost):
-                continue
-
-            # Make sandwich (deduct resources)
-            machine.make_sandwich(choice, order_ingredients)
-        else:
-            # Invalid input
-            print(f"Sorry, {choice} is not a valid input.")
+        if choice not in recipes:
+            print(f"Sorry, '{choice}' is not a valid option.")
             continue
+
+        order = recipes[choice]
+        order_ingredients = order["ingredients"]
+        cost = order["cost"]
+
+        # Check resources
+        if not machine.check_resources(order_ingredients):
+            continue
+
+        # Process coins and transaction
+        coins_inserted = machine.process_coins()
+        if not machine.transaction_result(coins_inserted, cost):
+            continue
+
+        # Make sandwich (deduct resources)
+        machine.make_sandwich(choice, order_ingredients)
 
 
 main()
