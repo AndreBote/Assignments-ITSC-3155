@@ -5,7 +5,15 @@ class SandwichMaker:
 
     def check_resources(self, ingredients):
         """Returns True when order can be made, False if ingredients are insufficient."""
-        #####
+        for item, req_amount in ingredients.items():
+            if self.machine_resources.get(item, 0) < req_amount:
+                print(f"Sorry there is not enough {item}.")
+                return False
+        return True
 
     def make_sandwich(self, sandwich_size, order_ingredients):
-        ########
+        """Deduct the required ingredients from the resources.
+           Hint: no output"""
+        for item, req_amount in order_ingredients.items():
+            self.machine_resources[item] -= req_amount
+        print(f"{sandwich_size} sandwich is ready. Bon appetit!")
