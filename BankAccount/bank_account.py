@@ -11,7 +11,7 @@ class BankAccount:
     def deposit(self, amount):
         if amount > 0:
             self.current_balance += amount
-            print("Deposited " + str(amount) + "\n")
+            print(f"Deposited {amount}.\n")
         else:
             print("Deposit amount must be greater than zero.\n")
 
@@ -22,7 +22,7 @@ class BankAccount:
             print("Withdrawal canceled. Current balance would fall below minimum balance.\n")
         else:
             self.current_balance -= amount
-            print("Withdrew " + str(amount) + "\n")
+            print(f"Withdrew {amount}.\n")
 
     def print_customer_information(self):
         print(f"Bank: {BankAccount.bank_title}")
