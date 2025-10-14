@@ -1,3 +1,7 @@
+# Andre Bautista
+# 801343013
+# Oct 14, 2025
+
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
